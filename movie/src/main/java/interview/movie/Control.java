@@ -5,9 +5,9 @@
  */
 package interview.movie;
 
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
 
 /**
  *
@@ -15,15 +15,12 @@ import org.springframework.web.client.RestTemplate;
  */
 
 @RestController
-public class Resource {    
+@RequestMapping("/filmes")
+public class Control {
     
-    RestTemplate restTemplate = new RestTemplate();
-    String url = "https://jsonmock.hackerrank.com/api/movies/search/?Title=Waterworld";
-    
-    @RequestMapping("/filmes")
-    Object getMovies() {
-        Object response = restTemplate.getForObject(url, Object.class);
-        return response;
+    @RequestMapping("/{movieName}")
+    public Object showResponse(@PathVariable("movieName") String movieName){
+        return new Catalog(movieName).getMovies();
     }
     
 }
