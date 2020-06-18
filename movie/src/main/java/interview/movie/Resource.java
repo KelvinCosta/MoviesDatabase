@@ -15,13 +15,14 @@ import org.springframework.web.client.RestTemplate;
  */
 
 @RestController
-@RequestMapping("/filmes")
 public class Resource {    
     
     RestTemplate restTemplate = new RestTemplate();
+    String url = "https://jsonmock.hackerrank.com/api/movies/search/?Title=Waterworld";
     
+    @RequestMapping("/filmes")
     Object getMovies() {
-        Object response = restTemplate.getForObject("https://jsonmock.hackerrank.com/api/movies/search/?Title=Waterworld", Object.class);
+        Object response = restTemplate.getForObject(url, Object.class);
         return response;
     }
     
