@@ -18,9 +18,18 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/filmes")
 public class Control {
     
+    Catalog catalog = new Catalog();
+    
     @RequestMapping("/{movieName}")
-    public Object showResponse(@PathVariable("movieName") String movieName){
-        return new Catalog(movieName).getMovies();
+    public Object showMovie (@PathVariable("movieName") String movieName) {
+        return catalog.getMovies(movieName, "1");
+    }
+    
+    @RequestMapping("/{movieName}/{pageNumber}")
+    public Object movieAndPage(
+            @PathVariable("movieName") String movieName, 
+            @PathVariable("pageNumber") String pageNumber) {        
+        return catalog.getMovies(movieName, pageNumber);
     }
     
 }
